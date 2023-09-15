@@ -1,6 +1,9 @@
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdio.h>
 #include "ultrasonic_sensor.h"
+
+static unsigned int echo_duration;
 
 void init_Ultrasonic_sensor(void)
 {
@@ -36,7 +39,7 @@ void trigger_Ultrasonic_sensor(void)
 
 unsigned int read_Ultrasonic_sensor(unsigned int ultrasonicEchoPin)
 {
-    unsigned int echo_duration = 0;
+    echo_duration = 0;
     while((Ultrasonic_Echo_Input&ultrasonicEchoPin) != ultrasonicEchoPin);
     while(((Ultrasonic_Echo_Input&ultrasonicEchoPin) == ultrasonicEchoPin) && (echo_duration<20000))
     {
@@ -51,56 +54,35 @@ unsigned int get_distance_Ultrasonic_sensor(unsigned int ultrasonicEchoPin)
 {
   trigger_Ultrasonic_sensor();
   return (read_Ultrasonic_sensor(ultrasonicEchoPin)/SCALE_FACTOR) + 20;
-  ;
+  
 }
 
 
-void integer_to_char(int integer_input, char* character_array, char type)
+void integer_to_char(int integer_input, char* character_array)
 {
   int reminder,quotient;    
-  if (type == 2)  
-  {	  
-    quotient = integer_input/10;	  
-    reminder = integer_input%10;	  
-    character_array[0] = quotient+0x30;	  
-    character_array[1] = reminder+0x30;	  
-    character_array[2] = '\0';  
-  }    
-  if (type == 3)  
-  {	  
-    quotient = integer_input/100;	  
-    reminder = integer_input%100;	  
-    character_array[0] = quotient+0x30;	  
-    quotient = reminder/10;	  
-    reminder = reminder%10;	  
-    character_array[1] = quotient+0x30;	  
-    character_array[2] = reminder+0x30;	  
-    character_array[3] = '\0';  
-  } 
-  if (type == 4)  
-  {	  
-    quotient = integer_input/1000;	// 1234  -- 1  
-    reminder = integer_input%1000;	// 234  
-    character_array[0] = quotient+0x30;	    //'1'
-    quotient = reminder/100;	       // 234  -- 2
-    reminder = reminder%100;	       // 34
-    character_array[1] = quotient+0x30;	  // '2'
-    quotient = reminder/10;	        //  3  
-    reminder = reminder%10;	
-    character_array[2] = quotient+0x30;	  
-    character_array[3] = reminder+0x30;	  
-    character_array[4] = '\0';  
-  } 
+
+  quotient = integer_input/100;	  
+  reminder = integer_input%100;	  
+  character_array[0] = quotient+0x30;	  
+  quotient = reminder/10;	  
+  reminder = reminder%10;	  
+  character_array[1] = quotient+0x30;	  
+  character_array[2] = reminder+0x30;	  
+  character_array[3] = '\0';   
+
+  return; 
 }
 
 int convert_ultrasonic_input_to_centimeters(int value)
 {
 char data_buffer[4],buffer[50],centimeters = 0;
- centimeters = value/10;
+  centimeters = value/10;
   //enables the value to be printed to serial monitor. 
-  integer_to_char(c_m,data_buffer,3);
+  integer_to_char(centimeters,data_buffer);
   printf(data_buffer);
   printf("cm\r\n");
 
    return centimeters;
 }
+

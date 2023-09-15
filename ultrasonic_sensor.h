@@ -3,7 +3,6 @@
 
 #include "common_defines.h"
 
-
 #define    BIT7    0x80
 #define    BIT6    0x40
 #define    BIT5    0x20
@@ -23,7 +22,7 @@
 #define RIGHT_ULTRASONIC_TRIGGER        5     
 
 //Change to calibrate sensor distance
-#define SCALE_FACTOR      2.5
+#define SCALE_FACTOR      3
 
 
 #define Ultrasonic_Triger_Port_Direction            DDR_(ULTRASONIC_PORT_IND)
@@ -44,7 +43,8 @@ void trigger_Ultrasonic_sensor(void);
 unsigned int read_Ultrasonic_sensor(unsigned int ultrasonicEchoPin);
 unsigned int get_distance_Ultrasonic_sensor(unsigned int ultrasonicEchoPin);
 int convert_ultrasonic_input_to_centimeters(int value);
-void integer_to_char(int integer_input, char* character_array, char type);
+void integer_to_char(int integer_input, char* character_array);
+
 
 
 #endif
