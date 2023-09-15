@@ -10,26 +10,26 @@
 #include "ultrasonic_sensor.h"
 
 int main(void){
-    sei();
+    _delay_ms(1000);
     init_servo();
     button_init(); 
     init_serial();
     init_Ultrasonic_sensor();
+    sei();
     static volatile bool buttonWasPressed = false; 
-    volatile uint8_t frontDistance = 0; 
+    int frontDistance = 0; 
 
-    while(!buttonWasPressed){
-         buttonClick(&buttonWasPressed);
-    }
+
+    // while(!buttonWasPressed){
+    //      buttonClick(&buttonWasPressed);
+    // }
     
     while(1){
-        drive_forward(); 
         frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
-        if(convert_ultrasonic_input_to_centimeters(frontDistance) < 10){
-            stop();
-            _delay_ms(200);
-            turn_left();
-        }
+        convert_ultrasonic_input_to_centimeters(frontDistance);
+        printf("new mesure\n");
+        _delay_ms(100); 
+        
     }
     return 0;
 }

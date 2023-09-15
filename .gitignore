@@ -11,3 +11,5 @@ bin/debug/uart.d
 bin/debug/uart.o
 bin/debug/ultrasonic_sensor.d
 bin/debug/ultrasonic_sensor.o
+bin/debug/comdef.d
+bin/debug/comdef.o
