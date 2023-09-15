@@ -1,3 +1,6 @@
+#ifndef _COMMON_DEFINES_H__
+#define _COMMON_DEFINES_H__
+
 //This file contains defines relating to bit operations and pin-, ddr-, and port handling. 
 
 #define BIT_SET(a, b) ((a) |= (1ULL << (b)))
@@ -10,3 +13,5 @@
 #define PORT_(name)       CON_CAT(PORT,name)
 #define PIN_(name)        CON_CAT(PIN,name)
 #define BIT_(name)        CON_CAT(BIT,name)
+
+#endif
