@@ -9,9 +9,9 @@ CFLAGS=-Wall -Wextra  -Wundef -pedantic \
 		-Os -std=gnu99 -DF_CPU=16000000UL -mmcu=${MCU} -DBAUD=19200
 LDFLAGS=-mmcu=$(MCU)
 PORT=\\\\.\\COM7
-BIN=mazeRobot
+BIN=mazerobot
 OUT=${BIN}.hex
-SOURCES = main.c uart.c servo.c button.c color_sensor.c drive.c led.c run_path.c ultra_sonic_sensor.c
+SOURCES = main.c uart.c servo.c button.c 
 
 DEBUG?=1
 

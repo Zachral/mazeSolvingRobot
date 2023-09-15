@@ -1,5 +1,12 @@
 {
     "files.associations": {
         "button.h": "c"
-    }
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\Users\\soder\\OneDrive\\Skrivbord\\YA\\Embedded\\mazeSolvingRobot",
+            "binaryPath": "c:\\Users\\soder\\OneDrive\\Skrivbord\\YA\\Embedded\\mazeSolvingRobot\\mazeRobot.elf",
+            "binaryArgs": []
+        }
+    ]
 }

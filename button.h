@@ -13,7 +13,6 @@
 #define BUTTON_IS_CLICKED(BUTTON_INPUT_PIN, BUTTON_PIN) !BIT_CHECK(BUTTON_INPUT_PIN, BUTTON_PIN)
 #define DEBOUNCE_DELAY_MS 300
 
-
 void buttonClick(volatile bool *buttonWasPressed);
 void button_init();
 #endif
