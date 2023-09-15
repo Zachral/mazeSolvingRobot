@@ -4,21 +4,21 @@
 #include "servo.h"
 
 void drive_forward(){
-    printf("forward");
+    printf("forward\n");
     left_servo_set_percentage(10);
     right_servo_set_percentage(-10); 
     return; 
 }
 
 void stop(){
-    printf("Stop");
+    printf("Stop\n");
     left_servo_set_percentage(0);
     right_servo_set_percentage(0);
     return;
 }
 
 void turn_left(){
-    printf("turning left"); 
+    printf("turning left\n"); 
     left_servo_set_percentage(-10);
     right_servo_set_percentage(-10);
     //delay sets the degree of turn
@@ -29,7 +29,7 @@ void turn_left(){
 }
 
 void turn_right(){
-    printf("turning right"); 
+    printf("turning right\n"); 
     left_servo_set_percentage(10);
     right_servo_set_percentage(10);
     //delay sets the degree of turn
@@ -40,7 +40,7 @@ void turn_right(){
 }
 
 void u_turn(){
-    printf("U-turn"); 
+    printf("U-turn\n"); 
     left_servo_set_percentage(10);
     right_servo_set_percentage(10);
     //delay sets the degree of turn

@@ -49,14 +49,12 @@ unsigned int read_Ultrasonic_sensor(unsigned int ultrasonicEchoPin)
     return echo_duration;
 }
 
-
 unsigned int get_distance_Ultrasonic_sensor(unsigned int ultrasonicEchoPin)
 {
   trigger_Ultrasonic_sensor();
   return (read_Ultrasonic_sensor(ultrasonicEchoPin)/SCALE_FACTOR) + 20;
   
 }
-
 
 void integer_to_char(int integer_input, char* character_array)
 {
@@ -74,15 +72,15 @@ void integer_to_char(int integer_input, char* character_array)
   return; 
 }
 
-int convert_ultrasonic_input_to_centimeters(int value)
-{
-char data_buffer[4],buffer[50],centimeters = 0;
+int convert_ultrasonic_input_to_centimeters(int value){
+  char data_buffer[4];
+  int centimeters = 0;
   centimeters = value/10;
   //enables the value to be printed to serial monitor. 
   integer_to_char(centimeters,data_buffer);
   printf(data_buffer);
   printf("cm\r\n");
 
-   return centimeters;
+  return centimeters;
 }
 
