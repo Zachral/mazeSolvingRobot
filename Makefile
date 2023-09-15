@@ -11,7 +11,7 @@ LDFLAGS=-mmcu=$(MCU)
 PORT=\\\\.\\COM7
 BIN=mazeRobot
 OUT=${BIN}.hex
-SOURCES = main.c uart.c servo.c button.c color_sensor.c drive.c led.c run_path.c ulra_sonic_sensor.c
+SOURCES = main.c uart.c servo.c button.c color_sensor.c drive.c led.c run_path.c ultra_sonic_sensor.c
 
 DEBUG?=1
 
