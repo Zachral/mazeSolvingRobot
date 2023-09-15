@@ -43,5 +43,8 @@ void init_Ultrasonic_sensor(void);
 void trigger_Ultrasonic_sensor(void);
 unsigned int read_Ultrasonic_sensor(unsigned int ultrasonicEchoPin);
 unsigned int get_distance_Ultrasonic_sensor(unsigned int ultrasonicEchoPin);
+int convert_ultrasonic_input_to_centimeters(int value);
+void integer_to_char(int integer_input, char* character_array, char type);
+
 
 #endif

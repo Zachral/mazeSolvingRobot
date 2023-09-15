@@ -7,12 +7,14 @@
 #include "servo.h"
 #include "button.h"
 #include "drive.h"
+#include "ultrasonic_sensor.h"
 
 int main(void){
     sei();
     init_servo();
     button_init(); 
     init_serial();
+    init_Ultrasonic_sensor();
     static volatile bool buttonWasPressed = false; 
 
     while(!buttonWasPressed){
