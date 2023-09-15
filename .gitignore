@@ -9,3 +9,5 @@ bin/debug/servo.d
 bin/debug/servo.o
 bin/debug/uart.d
 bin/debug/uart.o
+bin/debug/ultrasonic_sensor.d
+bin/debug/ultrasonic_sensor.o

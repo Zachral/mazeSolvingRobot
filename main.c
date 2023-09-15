@@ -16,6 +16,7 @@ int main(void){
     init_serial();
     init_Ultrasonic_sensor();
     static volatile bool buttonWasPressed = false; 
+    volatile uint8_t frontDistance = 0; 
 
     while(!buttonWasPressed){
          buttonClick(&buttonWasPressed);
@@ -23,11 +24,12 @@ int main(void){
     
     while(1){
         drive_forward(); 
-        _delay_ms(5000);
-        stop();
-        _delay_ms(1000);
-        turn_left(); 
-        drive_forward(); 
+        frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
+        if(convert_ultrasonic_input_to_centimeters(frontDistance) < 10){
+            stop();
+            _delay_ms(200);
+            turn_left();
+        }
     }
     return 0;
 }

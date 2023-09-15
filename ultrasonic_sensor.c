@@ -1,5 +1,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdio.h>
 #include "ultrasonic_sensor.h"
 
 void init_Ultrasonic_sensor(void)
@@ -51,7 +52,7 @@ unsigned int get_distance_Ultrasonic_sensor(unsigned int ultrasonicEchoPin)
 {
   trigger_Ultrasonic_sensor();
   return (read_Ultrasonic_sensor(ultrasonicEchoPin)/SCALE_FACTOR) + 20;
-  ;
+  
 }
 
 
@@ -96,9 +97,9 @@ void integer_to_char(int integer_input, char* character_array, char type)
 int convert_ultrasonic_input_to_centimeters(int value)
 {
 char data_buffer[4],buffer[50],centimeters = 0;
- centimeters = value/10;
+  centimeters = value/10;
   //enables the value to be printed to serial monitor. 
-  integer_to_char(c_m,data_buffer,3);
+  integer_to_char(centimeters,data_buffer,3);
   printf(data_buffer);
   printf("cm\r\n");
 
