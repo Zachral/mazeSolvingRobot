@@ -11,7 +11,7 @@ LDFLAGS=-mmcu=$(MCU)
 PORT=\\\\.\\COM7
 BIN=mazerobot
 OUT=${BIN}.hex
-SOURCES = main.c uart.c servo.c button.c 
+SOURCES = main.c uart.c servo.c button.c drive.c
 
 DEBUG?=1
 

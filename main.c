@@ -6,8 +6,7 @@
 #include "uart.h"
 #include "servo.h"
 #include "button.h"
-
-
+#include "drive.h"
 
 int main(void){
     sei();
@@ -15,16 +14,18 @@ int main(void){
     button_init(); 
     init_serial();
     static volatile bool buttonWasPressed = false; 
-    
+
     while(!buttonWasPressed){
          buttonClick(&buttonWasPressed);
     }
     
     while(1){
-        // while(buttonWasPressed) {
-            left_servo_set_percentage(8);
-            right_servo_set_percentage(-10); 
-        // }
+        drive_forward(); 
+        _delay_ms(5000);
+        stop();
+        _delay_ms(1000);
+        turn_left(); 
+        drive_forward(); 
     }
     return 0;
 }
