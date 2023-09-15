@@ -20,16 +20,20 @@ int main(void){
     int frontDistance = 0; 
 
 
-    // while(!buttonWasPressed){
-    //      buttonClick(&buttonWasPressed);
-    // }
+    while(!buttonWasPressed){
+         buttonClick(&buttonWasPressed);
+    }
     
     while(1){
+        drive_forward();
         frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
-        convert_ultrasonic_input_to_centimeters(frontDistance);
-        printf("new mesure\n");
-        _delay_ms(100); 
-        
+
+        if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9){
+            stop();
+            _delay_ms(350);
+            turn_left(); 
+        };
+       
     }
     return 0;
 }
