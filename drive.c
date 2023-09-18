@@ -5,8 +5,8 @@
 
 void drive_forward(){
     printf("forward\n");
-    left_servo_set_percentage(10);
-    right_servo_set_percentage(-10); 
+    left_servo_set_percentage(25);
+    right_servo_set_percentage(-26); 
     return; 
 }
 
@@ -19,10 +19,10 @@ void stop(){
 
 void turn_left(){
     printf("turning left\n"); 
-    left_servo_set_percentage(-10);
-    right_servo_set_percentage(-10);
+    left_servo_set_percentage(-20);
+    right_servo_set_percentage(-20);
     //delay sets the degree of turn
-    _delay_ms(2000);
+    _delay_ms(1400);
     stop();
     _delay_ms(500);
     return;
@@ -30,10 +30,10 @@ void turn_left(){
 
 void turn_right(){
     printf("turning right\n"); 
-    left_servo_set_percentage(10);
-    right_servo_set_percentage(10);
+    left_servo_set_percentage(20);
+    right_servo_set_percentage(20);
     //delay sets the degree of turn
-    _delay_ms(2000);
+    _delay_ms(1400);
     stop();
     _delay_ms(500);
     return;
@@ -41,10 +41,10 @@ void turn_right(){
 
 void u_turn(){
     printf("U-turn\n"); 
-    left_servo_set_percentage(10);
-    right_servo_set_percentage(10);
+    left_servo_set_percentage(20);
+    right_servo_set_percentage(20);
     //delay sets the degree of turn
-    _delay_ms(4000);
+    _delay_ms(2800);
     stop();
     _delay_ms(500);
     return;
