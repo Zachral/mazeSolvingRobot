@@ -17,7 +17,7 @@ int main(void){
     init_Ultrasonic_sensor();
     sei();
     static volatile bool buttonWasPressed = false; 
-    int frontDistance = 0; 
+    int frontDistance = 0, leftDistance = 0, rightDistance = 0; 
 
 
     while(!buttonWasPressed){
@@ -27,13 +27,17 @@ int main(void){
     while(1){
         drive_forward();
         frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
-
-        if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9){
-            stop();
-            _delay_ms(350);
-            turn_left(); 
-        };
-       
+        leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
+        rightDistance = get_distance_Ultrasonic_sensor(Right_Ultrasonic_Echo_pin);
+        if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9) {
+           printf("color check!\n");      
+        }
+        if(convert_ultrasonic_input_to_centimeters(leftDistance) > 15 || convert_ultrasonic_input_to_centimeters(rightDistance) > 15){
+            printf("space to the sides!\n"); 
+        }
+        if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4 || convert_ultrasonic_input_to_centimeters(rightDistance) < 4){
+            printf("TO CLOSE!\n");
+        }
     }
     return 0;
 }

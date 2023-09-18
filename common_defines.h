@@ -14,4 +14,7 @@
 #define PIN_(name)        CON_CAT(PIN,name)
 #define BIT_(name)        CON_CAT(BIT,name)
 
+#define LEFT    1
+#define RIGHT   2
+
 #endif
