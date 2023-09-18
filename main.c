@@ -8,6 +8,7 @@
 #include "button.h"
 #include "drive.h"
 #include "ultrasonic_sensor.h"
+#include "run_path.h"
 
 int main(void){
     _delay_ms(1000);
@@ -32,14 +33,10 @@ int main(void){
         if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9){
            //color_check(); 
            u_turn(); 
-        }
-        if(convert_ultrasonic_input_to_centimeters(leftDistance) > 15){
-            //decide_path(LEFT); 
-            turn_left();
-        }
-        if(convert_ultrasonic_input_to_centimeters(rightDistance) > 15){
-           //decide_path(RIGHT); 
-           turn_right; 
+        }else if(convert_ultrasonic_input_to_centimeters(leftDistance) > 20){
+            decide_path(LEFT);
+        }else if(convert_ultrasonic_input_to_centimeters(rightDistance) > 20){
+            decide_path(RIGHT); 
         }
         if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4){
         //    stabilize(LEFT);
