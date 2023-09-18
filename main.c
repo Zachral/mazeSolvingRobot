@@ -29,14 +29,24 @@ int main(void){
         frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
         leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
         rightDistance = get_distance_Ultrasonic_sensor(Right_Ultrasonic_Echo_pin);
-        if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9) {
-           printf("color check!\n");      
+        if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9){
+           //color_check(); 
+           u_turn(); 
         }
-        if(convert_ultrasonic_input_to_centimeters(leftDistance) > 15 || convert_ultrasonic_input_to_centimeters(rightDistance) > 15){
-            printf("space to the sides!\n"); 
+        if(convert_ultrasonic_input_to_centimeters(leftDistance) > 15){
+            //decide_path(LEFT); 
+            turn_left();
         }
-        if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4 || convert_ultrasonic_input_to_centimeters(rightDistance) < 4){
-            printf("TO CLOSE!\n");
+        if(convert_ultrasonic_input_to_centimeters(rightDistance) > 15){
+           //decide_path(RIGHT); 
+           turn_right; 
+        }
+        if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4){
+        //    stabilize(LEFT);
+
+        }
+        if(convert_ultrasonic_input_to_centimeters(rightDistance) < 4){
+           // stabilize(RIGHT);
         }
     }
     return 0;
