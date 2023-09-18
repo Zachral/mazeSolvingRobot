@@ -4,33 +4,9 @@
 #include "ultrasonic_sensor.h"
 
 static unsigned int echo_duration;
-static volatile int frontDistance = 0, leftDistance =0, rightDistance = 0;
 
-ISR(TIMER2_COMPB_vect){
-  leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin); 
-  rightDistance = get_distance_Ultrasonic_sensor(Right_Ultrasonic_Echo_pin);
-  frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
 
-  if(leftDistance < 9){
 
-  }
-  if(rightDistance < 9){
-
-  }
-  if(frontDistance < 9){
-
-  }
-  if(leftDistance < 4){
-
-  }
-  if(rightDistance < 4){
-
-  }
-  if(frontDistance < 4){
-
-  }
-
-}
 
 void init_Ultrasonic_sensor(void)
 {

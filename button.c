@@ -10,6 +10,7 @@ void button_init(){
 }
 
 void buttonClick(volatile bool *buttonWasPressed){
+	printf("im in!");
 	 if (BUTTON_IS_CLICKED(BUTTON_INPUT_PIN,BUTTON_PIN)) {
 		// Button press detected, wait for debouncing
 		_delay_ms(DEBOUNCE_DELAY_MS);
