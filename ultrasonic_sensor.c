@@ -4,6 +4,33 @@
 #include "ultrasonic_sensor.h"
 
 static unsigned int echo_duration;
+static volatile int frontDistance = 0, leftDistance =0, rightDistance = 0;
+
+ISR(TIMER2_COMPB_vect){
+  leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin); 
+  rightDistance = get_distance_Ultrasonic_sensor(Right_Ultrasonic_Echo_pin);
+  frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
+
+  if(leftDistance < 9){
+
+  }
+  if(rightDistance < 9){
+
+  }
+  if(frontDistance < 9){
+
+  }
+  if(leftDistance < 4){
+
+  }
+  if(rightDistance < 4){
+
+  }
+  if(frontDistance < 4){
+
+  }
+
+}
 
 void init_Ultrasonic_sensor(void)
 {
@@ -24,6 +51,12 @@ void init_Ultrasonic_sensor(void)
 
   Ultrasonic_Echo_Port_Direction &= ~(Front_Ultrasonic_Echo_pin);   // Ultrasonic Echo pin set to input
   Ultrasonic_Echo_Port |= Front_Ultrasonic_Echo_pin;      // Enable pullup
+
+  //set timer registers and prescaler
+  TCCR2A = 0; 
+	TCCR2B = (1<<CS20) | (1<<CS21) | (1<<CS22); 
+	OCR2B = 250; 
+	TIMSK2 = (1<<OCIE2B) | (1<<TOIE2); 
 }
 
 void trigger_Ultrasonic_sensor(void)
