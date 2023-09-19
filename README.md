@@ -1,3 +1,5 @@
+Maze solving robot!
+
 Purpose of the robot:
 
 To be able to solve a maze by finding the goal.
@@ -9,7 +11,7 @@ The robot should:
     Avoid driving in circles.
     Avoid hitting walls in the maze.
     Save the path choices it makes.
-    Distinguish between a regular wall and the goal.
+    Distinguish between a regular wall and the goal using color detection.
 
 It is desirable that the robot would:
 
