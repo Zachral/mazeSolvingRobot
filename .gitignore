@@ -14,3 +14,11 @@ bin/debug/ultrasonic_sensor.o
 bin/debug/comdef.d
 bin/debug/comdef.o
 bin/debug/drive.o
+bin/debug/drive.o
+bin/debug/drive.o
+bin/debug/run_path.o
+bin/debug/drive.o
+bin/debug/drive.o
+bin/debug/millis.d
+bin/debug/millis.o
+bin/debug/drive.o
