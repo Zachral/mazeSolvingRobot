@@ -9,6 +9,7 @@
 #include "drive.h"
 #include "ultrasonic_sensor.h"
 #include "run_path.h"
+#include "millis.h"
 
 int main(void){
     _delay_ms(1000);
@@ -16,9 +17,13 @@ int main(void){
     button_init(); 
     init_serial();
     init_Ultrasonic_sensor();
+    millis_init();
     sei();
     static volatile bool buttonWasPressed = false; 
-    int frontDistance = 0, leftDistance = 0, rightDistance = 0; 
+    //Setting starting distance value to not trigger turning at start, convert_ultrasonic_input_to_centimeters devides this number by 10
+    int frontDistance = 90, leftDistance = 50, rightDistance = 50;
+    volatile millis_t milliSecondSinceLastReading = 0;
+
 
 
     while(!buttonWasPressed){
@@ -27,20 +32,29 @@ int main(void){
     
     while(1){
         drive_forward();
-        frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
-        leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
-        rightDistance = get_distance_Ultrasonic_sensor(Right_Ultrasonic_Echo_pin);
+        if(millis_get() - milliSecondSinceLastReading > 500){
+            printf("reading");
+            frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
+            leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
+            rightDistance = get_distance_Ultrasonic_sensor(Right_Ultrasonic_Echo_pin);
+            milliSecondSinceLastReading = millis_get(); 
+        }
         if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9){
            //color_check(); 
-           u_turn(); 
+            u_turn(); 
+            reset_sensors(&frontDistance, &leftDistance,&rightDistance);
+            milliSecondSinceLastReading = millis_get(); 
         }else if(convert_ultrasonic_input_to_centimeters(leftDistance) > 20){
             decide_path(LEFT);
+            reset_sensors(&frontDistance, &leftDistance,&rightDistance);
+            milliSecondSinceLastReading = millis_get(); 
         }else if(convert_ultrasonic_input_to_centimeters(rightDistance) > 20){
             decide_path(RIGHT); 
+            reset_sensors(&frontDistance, &leftDistance,&rightDistance);
+            milliSecondSinceLastReading = millis_get(); 
         }
         if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4){
         //    stabilize(LEFT);
-
         }
         if(convert_ultrasonic_input_to_centimeters(rightDistance) < 4){
            // stabilize(RIGHT);

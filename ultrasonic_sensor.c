@@ -84,3 +84,9 @@ int convert_ultrasonic_input_to_centimeters(int value){
   return centimeters;
 }
 
+void reset_sensors(int *frontDistance, int *leftDistance, int *rightDistance){
+  *frontDistance = 90;
+  *leftDistance = 50; 
+  *rightDistance = 50;
+  return; 
+}

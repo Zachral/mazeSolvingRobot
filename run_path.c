@@ -5,7 +5,7 @@
 
 void decide_path(unsigned int direction){
     drive_forward();
-    _delay_ms(1800); 
+    _delay_ms(500); 
     if (direction == LEFT) turn_left();
     if (direction == RIGHT) turn_right();
     drive_forward();
