@@ -5,7 +5,7 @@
 
 void drive_forward(){
     printf("forward\n");
-    left_servo_set_percentage(45);
+    left_servo_set_percentage(47);
     right_servo_set_percentage(-40); 
     return; 
 }

@@ -32,7 +32,7 @@ int main(void){
     
     while(1){
         drive_forward();
-        if(millis_get() - milliSecondSinceLastReading > 800){
+        if(millis_get() - milliSecondSinceLastReading > 500){
             printf("reading");
             frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
             leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
