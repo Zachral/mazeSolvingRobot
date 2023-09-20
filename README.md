@@ -34,6 +34,7 @@ Hardware:
     Lego chassi
 
 Schematics:
-![Kopia av Robot circutry(2)](https://github.com/Zachral/mazeSolvingRobot/assets/101337887/6d8f8ad5-0fe3-4bcc-a28f-b9783e98b01a)
 
-  
+
+  ![Kopia av Robot circutry(2)](https://github.com/Zachral/mazeSolvingRobot/assets/101337887/5ec4e589-305e-4d2f-aa22-b92f6a87813f)
+
