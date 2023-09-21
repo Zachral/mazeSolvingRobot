@@ -17,6 +17,7 @@ int main(void){
     button_init(); 
     init_serial();
     init_Ultrasonic_sensor();
+    color_sensor_init();
     millis_init();
     sei();
     static volatile bool buttonWasPressed = false; 
