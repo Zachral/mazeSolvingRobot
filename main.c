@@ -10,22 +10,15 @@
 #include "ultrasonic_sensor.h"
 #include "run_path.h"
 #include "millis.h"
+#include "color_sensor.h"
+#include "hardware_config.h"
 
 int main(void){
-    _delay_ms(1000);
-    init_servo();
-    button_init(); 
-    init_serial();
-    init_Ultrasonic_sensor();
-    color_sensor_init();
-    millis_init();
-    sei();
+    hardware_setup(); 
     static volatile bool buttonWasPressed = false; 
     //Setting starting distance value to not trigger turning at start, convert_ultrasonic_input_to_centimeters devides this number by 10
     int frontDistance = 90, leftDistance = 50, rightDistance = 50;
     volatile millis_t milliSecondSinceLastReading = 0;
-
-
 
     while(!buttonWasPressed){
          buttonClick(&buttonWasPressed);
@@ -34,7 +27,6 @@ int main(void){
     while(1){
         drive_forward();
         if(millis_get() - milliSecondSinceLastReading > 500){
-            printf("reading");
             frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
             leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
             rightDistance = get_distance_Ultrasonic_sensor(Right_Ultrasonic_Echo_pin);

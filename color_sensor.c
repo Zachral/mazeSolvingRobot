@@ -17,8 +17,6 @@ void color_sensor_init(){
     //Set scaling to 20% - recomended for arduino
     COLOR_SENSOR_PORT_S0_S1_OUT             |= (1<<S0_PIN);
     COLOR_SENSOR_PORT_S0_S1_OUT             &= ~(1<<S1_PIN);
-    printf("I am set up!\n");
-   
 }
 
 void set_color_to_detect(uint8_t color){
