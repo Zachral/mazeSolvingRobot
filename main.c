@@ -17,6 +17,7 @@ int main(void){
     button_init(); 
     init_serial();
     init_Ultrasonic_sensor();
+    color_sensor_init();
     millis_init();
     sei();
     static volatile bool buttonWasPressed = false; 
@@ -40,19 +41,24 @@ int main(void){
             milliSecondSinceLastReading = millis_get(); 
         }
         if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9){
-           //color_check(); 
-            u_turn(); 
-            reset_sensors(&frontDistance, &leftDistance,&rightDistance);
-            milliSecondSinceLastReading = millis_get(); 
-        }else if(convert_ultrasonic_input_to_centimeters(leftDistance) > 20){
-            decide_path(LEFT);
-            reset_sensors(&frontDistance, &leftDistance,&rightDistance);
-            milliSecondSinceLastReading = millis_get(); 
-        }else if(convert_ultrasonic_input_to_centimeters(rightDistance) > 20){
-            decide_path(RIGHT); 
+            if(red_is_detected()){
+                printf("Done");
+            }else{
+                u_turn(leftDistance, rightDistance); 
+                reset_sensors(&frontDistance, &leftDistance,&rightDistance);
+                milliSecondSinceLastReading = millis_get(); 
+            }
+        }else if((convert_ultrasonic_input_to_centimeters(leftDistance) > 20) 
+                || (convert_ultrasonic_input_to_centimeters(rightDistance) > 20)){
+            decide_path(frontDistance, leftDistance,rightDistance);
             reset_sensors(&frontDistance, &leftDistance,&rightDistance);
             milliSecondSinceLastReading = millis_get(); 
         }
+        // }else if(convert_ultrasonic_input_to_centimeters(rightDistance) > 20){
+        //     decide_path(RIGHT); 
+        //     reset_sensors(&frontDistance, &leftDistance,&rightDistance);
+        //     milliSecondSinceLastReading = millis_get(); 
+        // }
         if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4){
         //    stabilize(LEFT);
         }

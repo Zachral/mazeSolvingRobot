@@ -3,13 +3,21 @@
 #include "common_defines.h"
 #include "drive.h"
 
-void decide_path(unsigned int direction){
+void decide_path( int frontDistance, int leftDistance, int rightDistance){
     drive_forward();
     _delay_ms(500); 
-    if (direction == LEFT) turn_left();
-    if (direction == RIGHT) turn_right();
-    drive_forward();
-     
-    return; 
-   
+    if (leftDistance > 20){ 
+        turn_left();
+        return; 
+    }
+    if((rightDistance > 20) && (frontDistance > 20)){ 
+        drive_forward();
+        return; 
+    }
+    if((rightDistance > 20) && (frontDistance < 20)){
+        turn_right();
+        return; 
+    }
+    return;
 }
+
