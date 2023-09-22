@@ -52,7 +52,7 @@ unsigned int read_Ultrasonic_sensor(unsigned int ultrasonicEchoPin)
 unsigned int get_distance_Ultrasonic_sensor(unsigned int ultrasonicEchoPin)
 {
   trigger_Ultrasonic_sensor();
-  return (read_Ultrasonic_sensor(ultrasonicEchoPin)/SCALE_FACTOR) + 20;
+  return (read_Ultrasonic_sensor(ultrasonicEchoPin)/SCALE_FACTOR) + 40;
   
 }
 

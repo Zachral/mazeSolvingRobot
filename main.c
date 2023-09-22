@@ -59,12 +59,12 @@ int main(void){
         //     reset_sensors(&frontDistance, &leftDistance,&rightDistance);
         //     milliSecondSinceLastReading = millis_get(); 
         // }
-        if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4){
-        //    stabilize(LEFT);
-        }
-        if(convert_ultrasonic_input_to_centimeters(rightDistance) < 4){
-           // stabilize(RIGHT);
-        }
+        // if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4){
+        // //    stabilize(LEFT);
+        // }
+        // if(convert_ultrasonic_input_to_centimeters(rightDistance) < 4){
+        //    // stabilize(RIGHT);
+        // }
     }
     return 0;
 }
