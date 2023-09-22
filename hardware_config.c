@@ -5,6 +5,7 @@
 #include "button.h"
 #include "ultrasonic_sensor.h"
 #include "millis.h"
+#include "led.h"
 
 void hardware_setup(){
     _delay_ms(1000);
@@ -14,6 +15,7 @@ void hardware_setup(){
     init_Ultrasonic_sensor();
     color_sensor_init();
     millis_init();
+    led_init();
     sei();
     return; 
 }

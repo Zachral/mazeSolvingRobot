@@ -12,6 +12,7 @@
 #include "millis.h"
 #include "color_sensor.h"
 #include "hardware_config.h"
+#include "led.h"
 
 int main(void){
     hardware_setup(); 
@@ -34,7 +35,7 @@ int main(void){
         }
         if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9){
             if(red_is_detected()){
-                printf("Done");
+                light_led();
             }else{
                 u_turn(leftDistance, rightDistance); 
                 reset_sensors(&frontDistance, &leftDistance,&rightDistance);
