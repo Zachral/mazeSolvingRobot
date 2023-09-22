@@ -5,4 +5,4 @@ bin/debug/run_path.o: run_path.c c:\avr\avr\include\avr\io.h \
  c:\avr\avr\include\avr\common.h c:\avr\avr\include\avr\version.h \
  c:\avr\avr\include\avr\fuse.h c:\avr\avr\include\avr\lock.h \
  c:\avr\avr\include\util\delay.h c:\avr\avr\include\util\delay_basic.h \
- c:\avr\avr\include\math.h common_defines.h drive.h
+ c:\avr\avr\include\math.h common_defines.h drive.h ultrasonic_sensor.h

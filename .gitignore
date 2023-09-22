@@ -24,3 +24,4 @@ bin/debug/millis.o
 bin/debug/drive.o
 bin/debug/color_sensor.d
 bin/debug/color_sensor.o
+bin/debug/run_path.d
