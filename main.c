@@ -16,15 +16,15 @@
 
 int main(void){
     hardware_setup(); 
-    static volatile bool buttonWasPressed = false; 
+    static volatile bool isButtonPressed = false; 
     //Setting starting distance value to not trigger turning at start, convert_ultrasonic_input_to_centimeters devides this number by 10
     int frontDistance = 90, leftDistance = 50, rightDistance = 50;
     volatile millis_t milliSecondSinceLastReading = 0;
     volatile millis_t timeSinceFlash = 0; 
 
-    while(!buttonWasPressed){
+    while(!isButtonPressed){
         flash_led(&timeSinceFlash, 500);
-        buttonClick(&buttonWasPressed);
+        buttonClick(&isButtonPressed);
     }
     turn_of_led();
     while(1){
@@ -38,6 +38,7 @@ int main(void){
         if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9){
             if(red_is_detected()){
                 light_led();
+                break; 
             }else{
                 u_turn(leftDistance, rightDistance); 
                 reset_sensors(&frontDistance, &leftDistance,&rightDistance);

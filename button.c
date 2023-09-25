@@ -9,14 +9,14 @@ void button_init(){
     return; 
 }
 
-void buttonClick(volatile bool *buttonWasPressed){
+void buttonClick(volatile bool *isButtonPressed){
 	 if (BUTTON_IS_CLICKED(BUTTON_INPUT_PIN,BUTTON_PIN)) {
 		// Button press detected, wait for debouncing
 		_delay_ms(DEBOUNCE_DELAY_MS);
 		
 		// Check the button state again after debouncing
 		if (BUTTON_IS_CLICKED(BUTTON_INPUT_PIN, BUTTON_PIN)) {
-			*buttonWasPressed = true; 
+			*isButtonPressed = true; 
 			}
 		}
 	return; 
