@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "button.h": "c"
+        "button.h": "c",
+        "math.h": "c"
     },
     "makefile.launchConfigurations": [
         {

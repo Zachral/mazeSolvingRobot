@@ -29,3 +29,7 @@ bin/debug/hardware_config.d
 bin/debug/hardware_config.o
 bin/debug/led.d
 bin/debug/led.o
+.vscode/settings.json
+bin/debug/analog_write.d
+bin/debug/analog_write.o
+.vscode/settings.json

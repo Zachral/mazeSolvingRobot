@@ -20,11 +20,13 @@ int main(void){
     //Setting starting distance value to not trigger turning at start, convert_ultrasonic_input_to_centimeters devides this number by 10
     int frontDistance = 90, leftDistance = 50, rightDistance = 50;
     volatile millis_t milliSecondSinceLastReading = 0;
+    volatile millis_t timeSinceFlash = 0; 
 
     while(!buttonWasPressed){
-         buttonClick(&buttonWasPressed);
+        flash_led(&timeSinceFlash, 500);
+        buttonClick(&buttonWasPressed);
     }
-    
+    turn_of_led();
     while(1){
         drive_forward();
         if(millis_get() - milliSecondSinceLastReading > 500){
