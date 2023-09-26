@@ -69,7 +69,7 @@ long Convert_input_frequency(long frequency, long in_min, long in_max, long out_
   return (frequency - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-unsigned int red_is_detected(){
+unsigned int detect_red_color(){
         unsigned int redFrequency = 0, greenFrequency = 0, blueFrequency = 0, redColor = 0,  greenColor = 0, blueColor = 0; 
 
         set_color_to_detect(RED);

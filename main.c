@@ -29,17 +29,23 @@ int main(void){
     turn_of_led();
     while(1){
         drive_forward();
-        if(millis_get() - milliSecondSinceLastReading > 500){
-            frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
-            leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
-            rightDistance = get_distance_Ultrasonic_sensor(Right_Ultrasonic_Echo_pin);
+        if(millis_get() - milliSecondSinceLastReading > 450){
+            read_ultrasonic_sensor(&frontDistance, &leftDistance, &rightDistance);
             milliSecondSinceLastReading = millis_get(); 
         }
+        if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4){
+            stabilize(LEFT);
+        }
+        if(convert_ultrasonic_input_to_centimeters(rightDistance) < 4){
+            stabilize(RIGHT);
+        }
         if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9){
-            if(red_is_detected()){
+            drive_slowly_forward();
+            if(detect_red_color()){
                 light_led();
                 break; 
             }else{
+                back_up(); 
                 u_turn(leftDistance, rightDistance); 
                 reset_sensors(&frontDistance, &leftDistance,&rightDistance);
                 milliSecondSinceLastReading = millis_get(); 
@@ -50,17 +56,7 @@ int main(void){
             reset_sensors(&frontDistance, &leftDistance,&rightDistance);
             milliSecondSinceLastReading = millis_get(); 
         }
-        // }else if(convert_ultrasonic_input_to_centimeters(rightDistance) > 20){
-        //     decide_path(RIGHT); 
-        //     reset_sensors(&frontDistance, &leftDistance,&rightDistance);
-        //     milliSecondSinceLastReading = millis_get(); 
-        // }
-        // if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4){
-        // //    stabilize(LEFT);
-        // }
-        // if(convert_ultrasonic_input_to_centimeters(rightDistance) < 4){
-        //    // stabilize(RIGHT);
-        // }
+       
     }
     return 0;
 }

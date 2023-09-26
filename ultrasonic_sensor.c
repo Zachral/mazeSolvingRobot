@@ -90,3 +90,10 @@ void reset_sensors(int *frontDistance, int *leftDistance, int *rightDistance){
   *rightDistance = 50;
   return; 
 }
+
+ void read_ultrasonic_sensor(int *frontDistance, int *leftDistance,  int *rightDistance){
+  *frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
+  *leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
+  *rightDistance = get_distance_Ultrasonic_sensor(Right_Ultrasonic_Echo_pin);
+  return 0; 
+ }
