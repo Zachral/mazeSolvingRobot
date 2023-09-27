@@ -73,13 +73,13 @@ void u_turn(int leftDistance, int rightDistance){
 void stabilize(uint8_t side){
     switch (side){
     case LEFT:
-        left_servo_set_percentage(53);
+        left_servo_set_percentage(43);
         right_servo_set_percentage(-70);
         _delay_ms(500);
         break;
     case RIGHT:
         left_servo_set_percentage(73);
-        right_servo_set_percentage(-50);
+        right_servo_set_percentage(-40);
         _delay_ms(500);
     default:
         drive_forward();

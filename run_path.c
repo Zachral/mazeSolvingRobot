@@ -11,10 +11,15 @@ void decide_action( int frontDistance, int leftDistance, int rightDistance, acti
     drive_forward();
     _delay_ms(500); 
     if (convert_ultrasonic_input_to_centimeters(leftDistance) > 20){ 
-        add_action_to_current_path(LEFT_TURN, &*actionsTakenByRobot);
-        actionsTakenByRobot->numberOfActions++;  
-        turn_left();
-        return; 
+        if((actionsTakenByRobot->currentRunPath[actionsTakenByRobot->numberOfActions-1].currentAction == LEFT_TURN) && 
+        (millis_get() - actionsTakenByRobot->currentRunPath[actionsTakenByRobot->numberOfActions-1].timeSinceAction < 2000)){
+            return; 
+        }else{
+            add_action_to_current_path(LEFT_TURN, &*actionsTakenByRobot);
+            actionsTakenByRobot->numberOfActions++;  
+            turn_left();
+            return; 
+        }
     }
     if((convert_ultrasonic_input_to_centimeters(rightDistance) > 20) 
         && (convert_ultrasonic_input_to_centimeters(frontDistance) > 20)){ 
@@ -22,11 +27,16 @@ void decide_action( int frontDistance, int leftDistance, int rightDistance, acti
         return; 
     }
     if((convert_ultrasonic_input_to_centimeters(rightDistance) > 20) 
-        && (convert_ultrasonic_input_to_centimeters(frontDistance) < 20)){
-        add_action_to_current_path(RIGHT_TURN, &*actionsTakenByRobot);
-        actionsTakenByRobot->numberOfActions++; 
-        turn_right();
-        return; 
+    && (convert_ultrasonic_input_to_centimeters(frontDistance) < 20)){
+        if((actionsTakenByRobot->currentRunPath[actionsTakenByRobot->numberOfActions-1].currentAction == RIGHT_TURN) && 
+        (millis_get() - actionsTakenByRobot->currentRunPath[actionsTakenByRobot->numberOfActions-1].timeSinceAction < 2000)){
+            return;
+        }else{
+            add_action_to_current_path(RIGHT_TURN, &*actionsTakenByRobot);
+            actionsTakenByRobot->numberOfActions++; 
+            turn_right();
+            return; 
+        }
     }
     return;
 }

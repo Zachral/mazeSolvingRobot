@@ -53,14 +53,12 @@ int main(void){
                 actionsTakenByRobot.numberOfActions++;
                 back_up(); 
                 u_turn(leftDistance, rightDistance); 
-                
                 reset_sensors(&frontDistance, &leftDistance,&rightDistance);
-                //milliSecondSinceLastReading = millis_get(); 
             }
         }
-        if(millis_get() - milliSecondSinceLastReading > 550){
+        if(millis_get() - milliSecondSinceLastReading > 450){
             if((convert_ultrasonic_input_to_centimeters(leftDistance) > 20) 
-                    || (convert_ultrasonic_input_to_centimeters(rightDistance) > 20)){
+            || (convert_ultrasonic_input_to_centimeters(rightDistance) > 20)){
                 decide_action(frontDistance, leftDistance,rightDistance, &actionsTakenByRobot);
                 reset_sensors(&frontDistance, &leftDistance,&rightDistance);
                 milliSecondSinceLastReading = millis_get(); 
