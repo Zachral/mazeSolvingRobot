@@ -29,10 +29,9 @@ int main(void){
     turn_of_led();
     while(1){
         drive_forward();
-        if(millis_get() - milliSecondSinceLastReading > 450){
-            read_ultrasonic_sensor(&frontDistance, &leftDistance, &rightDistance);
-            milliSecondSinceLastReading = millis_get(); 
-        }
+        read_ultrasonic_sensor(&frontDistance, &leftDistance, &rightDistance);
+        //milliSecondSinceLastReading = millis_get(); 
+        
         if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4){
             stabilize(LEFT);
         }
@@ -48,13 +47,16 @@ int main(void){
                 back_up(); 
                 u_turn(leftDistance, rightDistance); 
                 reset_sensors(&frontDistance, &leftDistance,&rightDistance);
+                //milliSecondSinceLastReading = millis_get(); 
+            }
+        }
+        if(millis_get() - milliSecondSinceLastReading > 550){
+            if((convert_ultrasonic_input_to_centimeters(leftDistance) > 20) 
+                    || (convert_ultrasonic_input_to_centimeters(rightDistance) > 20)){
+                decide_path(frontDistance, leftDistance,rightDistance);
+                reset_sensors(&frontDistance, &leftDistance,&rightDistance);
                 milliSecondSinceLastReading = millis_get(); 
             }
-        }else if((convert_ultrasonic_input_to_centimeters(leftDistance) > 20) 
-                || (convert_ultrasonic_input_to_centimeters(rightDistance) > 20)){
-            decide_path(frontDistance, leftDistance,rightDistance);
-            reset_sensors(&frontDistance, &leftDistance,&rightDistance);
-            milliSecondSinceLastReading = millis_get(); 
         }
        
     }

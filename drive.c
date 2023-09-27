@@ -41,7 +41,7 @@ void turn_left(){
     left_servo_set_percentage(-50);
     right_servo_set_percentage(-50);
     //delay sets the degree of turn
-    _delay_ms(650);
+    _delay_ms(700);
     return;
 }
 
@@ -51,7 +51,7 @@ void turn_right(){
     left_servo_set_percentage(50);
     right_servo_set_percentage(50);
     //delay sets the degree of turn
-    _delay_ms(650);
+    _delay_ms(700);
     return;
 }
 
@@ -66,7 +66,7 @@ void u_turn(int leftDistance, int rightDistance){
         right_servo_set_percentage(50);  
     }
     //delay sets the degree of turn
-    _delay_ms(1350);
+    _delay_ms(1200);
     return;
 }
 
