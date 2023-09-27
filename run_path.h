@@ -21,5 +21,7 @@ typedef struct{
 
 
 void decide_action( int frontDistance, int leftDistance, int rightDistance, actions_taken_by_robot_t *actionsTakenByRobot); 
+unsigned int is_making_an_action(actions_taken_by_robot_t actionsTakenByRobot, driving_action_t currentTurn);
+void do_action(int direction, actions_taken_by_robot_t *actionsTakenByRobot);
 void add_action_to_current_path(driving_action_t action, actions_taken_by_robot_t *actionsTakenByRobot);
 #endif

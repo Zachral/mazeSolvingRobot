@@ -6,6 +6,34 @@
 #include "drive.h"
 #include "ultrasonic_sensor.h"
 
+ //this function checks if the last turn made is the same as the robot wants to do now, and if that turn was made was less then 2 seconds ago.
+//if thats the case, skip this turn action. This is for timing issues when comming back from a dead end. 
+unsigned int is_making_an_action(actions_taken_by_robot_t actionsTakenByRobot, driving_action_t currentTurn){
+    if((actionsTakenByRobot.currentRunPath[actionsTakenByRobot.numberOfActions-1].currentAction == currentTurn) && 
+    (millis_get() - actionsTakenByRobot.currentRunPath[actionsTakenByRobot.numberOfActions-1].timeSinceAction < 2000))
+        return 0;
+    return 1;  
+}
+
+void do_action(int direction, actions_taken_by_robot_t *actionsTakenByRobot){
+    drive_forward();
+    _delay_ms(500); 
+    switch (direction){
+    case LEFT:
+        turn_left();
+        add_action_to_current_path(LEFT_TURN, &*actionsTakenByRobot);
+        actionsTakenByRobot->numberOfActions++;  
+        break;
+    case RIGHT:
+        turn_right();
+        add_action_to_current_path(RIGHT_TURN, &*actionsTakenByRobot);
+        actionsTakenByRobot->numberOfActions++; 
+    default:
+        drive_forward();
+        break;
+    }
+}
+
 void decide_action( int frontDistance, int leftDistance, int rightDistance, actions_taken_by_robot_t *actionsTakenByRobot){
     drive_forward();
     _delay_ms(500); 

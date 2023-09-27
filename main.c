@@ -57,11 +57,15 @@ int main(void){
             }
         }
         if(millis_get() - milliSecondSinceLastReading > 450){
-            if((convert_ultrasonic_input_to_centimeters(leftDistance) > 20) 
-            || (convert_ultrasonic_input_to_centimeters(rightDistance) > 20)){
-                decide_action(frontDistance, leftDistance,rightDistance, &actionsTakenByRobot);
-                reset_sensors(&frontDistance, &leftDistance,&rightDistance);
-                milliSecondSinceLastReading = millis_get(); 
+            if((convert_ultrasonic_input_to_centimeters(leftDistance) > 20) && is_making_an_action(actionsTakenByRobot, LEFT_TURN)){
+                do_action(LEFT, &actionsTakenByRobot);
+            }
+            if(((convert_ultrasonic_input_to_centimeters(rightDistance) > 20) 
+            && (convert_ultrasonic_input_to_centimeters(frontDistance) < 20)) && is_making_an_action(actionsTakenByRobot, RIGHT_TURN)){
+                do_action(RIGHT, &actionsTakenByRobot);
+            }    
+            reset_sensors(&frontDistance, &leftDistance,&rightDistance);
+            milliSecondSinceLastReading = millis_get(); 
                 for(int i = 0; i < actionsTakenByRobot.numberOfActions; i++){
                     printf("Action %d = %d. Num of actions = %d\n", i, actionsTakenByRobot.currentRunPath[i].currentAction, actionsTakenByRobot.numberOfActions); 
                 }
