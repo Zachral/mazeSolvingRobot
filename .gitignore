@@ -33,3 +33,7 @@ bin/debug/led.o
 bin/debug/analog_write.d
 bin/debug/analog_write.o
 .vscode/settings.json
+bin/debug/drive.o
+bin/debug/run_path.d
+bin/debug/drive.o
+bin/debug/run_path.d
