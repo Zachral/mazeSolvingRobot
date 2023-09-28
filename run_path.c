@@ -17,7 +17,7 @@ unsigned int is_making_an_action(actions_taken_by_robot_t actionsTakenByRobot, d
 
 void do_action(int direction, actions_taken_by_robot_t *actionsTakenByRobot){
     drive_forward();
-    _delay_ms(500); 
+    _delay_ms(700); 
     switch (direction){
     case LEFT:
         turn_left();
@@ -28,6 +28,7 @@ void do_action(int direction, actions_taken_by_robot_t *actionsTakenByRobot){
         turn_right();
         add_action_to_current_path(RIGHT_TURN, &*actionsTakenByRobot);
         actionsTakenByRobot->numberOfActions++; 
+        break; 
     default:
         drive_forward();
         break;
@@ -60,7 +61,8 @@ void decide_action( int frontDistance, int leftDistance, int rightDistance, acti
     if((convert_ultrasonic_input_to_centimeters(rightDistance) > 20) 
     && (convert_ultrasonic_input_to_centimeters(frontDistance) < 20)){
         if((actionsTakenByRobot->currentRunPath[actionsTakenByRobot->numberOfActions-1].currentAction == RIGHT_TURN) && 
-        (millis_get() - actionsTakenByRobot->currentRunPath[actionsTakenByRobot->numberOfActions-1].timeSinceAction < 2000)){
+        (millis_get() - actionsTakenByRobot->currentRunPath[actionsTakenByRobot->numberOfActions-1].timeSinceAction < 1500
+        )){
             return;
         }else{
             add_action_to_current_path(RIGHT_TURN, &*actionsTakenByRobot);

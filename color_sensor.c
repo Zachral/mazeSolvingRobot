@@ -47,17 +47,17 @@ unsigned int read_color_sensor(unsigned int out_pin, unsigned int timeout){
    
     while (!(BIT_CHECK(COLOR_SENSOR_OUTPUT,out_pin))) {
       //returns if there is no signal
-      if(iterations++ == maxIterations) return 0;
+      //if(iterations++ == maxIterations) return 0;
     }
 
     //wait for signal to go low
     while(BIT_CHECK(COLOR_SENSOR_OUTPUT,out_pin)){
-      if(iterations++ ==  maxIterations) return 0;
+      //if(iterations++ ==  maxIterations) return 0;
     }
 
     //start reading the low signal until it goes high
     while (!(BIT_CHECK(COLOR_SENSOR_OUTPUT,out_pin))){
-      if(iterations++ == maxIterations) return 0;
+      //if(iterations++ == maxIterations) return 0;
       pulseWidth++;
     }
 
@@ -87,10 +87,6 @@ unsigned int detect_red_color(){
         blueColor = Convert_input_frequency(blueFrequency, 14, 46, 255, 0); 
         _delay_ms(100); 
 
-        if(redColor > greenColor && redColor > blueColor){ 
-          printf("RED DETECTED");
-          return 1;
-        }
         if(greenColor > redColor && greenColor > blueColor){ 
           printf("GREEN DETECTED\n");
           return 0;
@@ -98,6 +94,10 @@ unsigned int detect_red_color(){
         if(blueColor > redColor && blueColor > greenColor){
           printf("BLUE DETECTED\n");
           return 0;
+        }
+        if(redColor > greenColor && redColor > blueColor){ 
+          printf("RED DETECTED");
+          return 1;
         }
     return 0; 
 }

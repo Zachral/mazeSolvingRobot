@@ -5,7 +5,7 @@
 
 void drive_forward(){
     printf("forward\n");
-    left_servo_set_percentage(53);
+    left_servo_set_percentage(50);
     right_servo_set_percentage(-50); 
     return; 
 }
@@ -13,7 +13,7 @@ void drive_forward(){
 void drive_slowly_forward(){
     printf("slow forward"); 
     stop();
-    left_servo_set_percentage(28);
+    left_servo_set_percentage(25);
     right_servo_set_percentage(-25); 
     _delay_ms(500); 
     return; 
@@ -66,11 +66,12 @@ void u_turn(int leftDistance, int rightDistance){
         right_servo_set_percentage(50);  
     }
     //delay sets the degree of turn
-    _delay_ms(1200);
+    _delay_ms(1400);
     return;
 }
 
 void stabilize(uint8_t side){
+    printf("stabilize\n");
     switch (side){
     case LEFT:
         left_servo_set_percentage(43);

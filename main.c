@@ -20,7 +20,7 @@ int main(void){
     actionsTakenByRobot.numberOfActions = 0; 
     static volatile bool isButtonPressed = false; 
     //Setting starting distance value to not trigger turning at start, convert_ultrasonic_input_to_centimeters devides this number by 10
-    int frontDistance = 90, leftDistance = 50, rightDistance = 50;
+    int frontDistance = 90, leftDistance = 60, rightDistance = 60;
     volatile millis_t milliSecondSinceLastReading = 0;
     volatile millis_t timeSinceFlash = 0; 
 
@@ -34,29 +34,29 @@ int main(void){
         read_ultrasonic_sensor(&frontDistance, &leftDistance, &rightDistance);
         //milliSecondSinceLastReading = millis_get(); 
         
-        if(convert_ultrasonic_input_to_centimeters(leftDistance) < 4){
+        if(convert_ultrasonic_input_to_centimeters(leftDistance) < 6){
             stabilize(LEFT);
         }
-        if(convert_ultrasonic_input_to_centimeters(rightDistance) < 4){
+        if(convert_ultrasonic_input_to_centimeters(rightDistance) < 6){
             stabilize(RIGHT);
         }
-        if(convert_ultrasonic_input_to_centimeters(frontDistance) < 9){
+        if(convert_ultrasonic_input_to_centimeters(frontDistance) < 8){
             drive_slowly_forward();
             if(detect_red_color()){
                 light_led();
                 break; 
             }else{
+                back_up(); 
+                u_turn(leftDistance, rightDistance); 
                 add_action_to_current_path(U_TURN, &actionsTakenByRobot);
                 for(int i = 0; i <= actionsTakenByRobot.numberOfActions; i++){
                     printf("Action %d = %d. Num of actions = %d\n", i, actionsTakenByRobot.currentRunPath[i].currentAction, actionsTakenByRobot.numberOfActions); 
                 }
                 actionsTakenByRobot.numberOfActions++;
-                back_up(); 
-                u_turn(leftDistance, rightDistance); 
-                reset_sensors(&frontDistance, &leftDistance,&rightDistance);
+                //reset_sensors(&frontDistance, &leftDistance,&rightDistance);
             }
         }
-        if(millis_get() - milliSecondSinceLastReading > 450){
+        if(millis_get() - milliSecondSinceLastReading > 350){
             if((convert_ultrasonic_input_to_centimeters(leftDistance) > 20) && is_making_an_action(actionsTakenByRobot, LEFT_TURN)){
                 do_action(LEFT, &actionsTakenByRobot);
             }
@@ -64,14 +64,12 @@ int main(void){
             && (convert_ultrasonic_input_to_centimeters(frontDistance) < 20)) && is_making_an_action(actionsTakenByRobot, RIGHT_TURN)){
                 do_action(RIGHT, &actionsTakenByRobot);
             }    
-            reset_sensors(&frontDistance, &leftDistance,&rightDistance);
+            //reset_sensors(&frontDistance, &leftDistance,&rightDistance);
             milliSecondSinceLastReading = millis_get(); 
                 for(int i = 0; i < actionsTakenByRobot.numberOfActions; i++){
                     printf("Action %d = %d. Num of actions = %d\n", i, actionsTakenByRobot.currentRunPath[i].currentAction, actionsTakenByRobot.numberOfActions); 
                 }
             }
         }
-       
-    }
     return 0;
 }
