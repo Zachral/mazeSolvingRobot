@@ -10,8 +10,10 @@
 //if thats the case, skip this turn action. This is for timing issues when comming back from a dead end. 
 unsigned int is_making_an_action(actions_taken_by_robot_t actionsTakenByRobot, driving_action_t currentTurn){
     if((actionsTakenByRobot.currentRunPath[actionsTakenByRobot.numberOfActions-1].currentAction == currentTurn) && 
-    (millis_get() - actionsTakenByRobot.currentRunPath[actionsTakenByRobot.numberOfActions-1].timeSinceAction < 2000))
+    (millis_get() - actionsTakenByRobot.currentRunPath[actionsTakenByRobot.numberOfActions-1].timeSinceAction < 2000)){
+        printf("no turn to %d", currentTurn);
         return 0;
+    }
     return 1;  
 }
 

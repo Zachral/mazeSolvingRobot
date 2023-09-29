@@ -20,10 +20,9 @@
 #define GREEN                                   2
 #define BLUE                                    3
 
-
 void color_sensor_init();
 void set_color_to_detect(uint8_t color);
 unsigned int read_color_sensor(unsigned int out_pin, unsigned int timeout); 
 long Convert_input_frequency(long frequency, long in_min, long in_max, long out_min, long out_max);
-unsigned int detect_red_color();
+int detect_red_color();
 #endif
